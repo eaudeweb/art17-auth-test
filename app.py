@@ -16,7 +16,11 @@ def home():
         headers['Cookie'] = cookie
     url = app.config['ART17_AUTH_SERVICE']
     resp = requests.post(url, headers=headers)
-    return flask.Response(resp.text, content_type='text/plain')
+    return flask.render_template('home.html', **{
+        'url': url,
+        'cookie': cookie,
+        'resp': resp,
+    })
 
 
 if __name__ == '__main__':
