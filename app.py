@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import flask
+from path import path
 
 app = flask.Flask(__name__)
+app.config.from_pyfile(path(__file__).abspath().parent / 'settings.py')
 
 
 @app.route('/')
