@@ -10,8 +10,12 @@ app.config.from_pyfile(path(__file__).abspath().parent / 'settings.py')
 
 @app.route('/')
 def home():
+    cookie = flask.request.headers.get('Cookie')
+    headers = {}
+    if cookie:
+        headers['Cookie'] = cookie
     url = app.config['ART17_AUTH_SERVICE']
-    resp = requests.post(url)
+    resp = requests.post(url, headers=headers)
     return flask.Response(resp.text, content_type='text/plain')
 
 
